@@ -3196,7 +3196,7 @@ const initializeFormElements = () => {
           params: [
             {
               from: accounts[0],
-              to: '0xafb979d9afad1ad27c5eff4e27226e3ab9e5dcc9:FORCEINVALIDTX',
+              to: '0xafb979d9afad1ad27c5eff4e27226e3ab9e5dcc9:reciever',
               data: '0xa22cb4650000000000000000000000000000dd26dd56ec6f036273d440bf1072a7b800000000000000000000000000000000000000000000000000000000000000000001',
               value: '0x0000',
               gasLimit: '0x5028',
